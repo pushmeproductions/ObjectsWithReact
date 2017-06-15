@@ -5,11 +5,9 @@ function items (state = [], action) {
     console.log({action});
       newState.push(action.item)
       return newState
-    case 'MOUSE_ON':
-      console.log({action});
+    case 'MOUSE_EVENT':
       return newState
-    case 'MOUSE_OFF':
-      return newState
+
     default:
       return state
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from '../objects/item'
 import Smile from '../objects/Smile'
+import Thinking from '../objects/thinking'
 import {connect} from 'react-redux'
 import {receiveItem} from '../actions/items'
 
@@ -16,13 +17,13 @@ class Game extends React.Component {
   }
   componentWillMount() {
     console.log("mounted");
-    this.props.dispatch(receiveItem(new Item(this.props.dispatch)))
+    this.props.dispatch(receiveItem(new Thinking(this.props.dispatch)))
     this.props.dispatch(receiveItem(new Smile(this.props.dispatch)))
   }
   renderItem(item) {
     return (
-      <div className="item" onMouseOver={() => item.mouseOn()} onMouseOut={() => item.mouseOff()}>
-        <img src={item.image} />
+      <div className="item" >
+        <img onMouseOver={() => item.mouseOn()} onMouseOut={() => item.mouseOff()} src={item.image} />
       </div>
     )
   }
