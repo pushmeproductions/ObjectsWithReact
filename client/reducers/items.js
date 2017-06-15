@@ -7,7 +7,11 @@ function items (state = [], action) {
       return newState
     case 'MOUSE_EVENT':
       return newState
-
+    case 'ADD_TO_INVENTORY':
+      return newState.filter(item => item !== action.item)
+    case 'DROP_FROM_INVENTORY':
+      newState.push(action.item)
+      return newState
     default:
       return state
   }

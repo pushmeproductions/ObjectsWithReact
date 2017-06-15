@@ -3,17 +3,18 @@ import Item from '../objects/item'
 import Smile from '../objects/Smile'
 import Thinking from '../objects/thinking'
 import {connect} from 'react-redux'
-import {receiveItem} from '../actions/items'
+import {receiveItem, dropItem} from '../actions/items'
 
 class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      objects: props.items
+      objects: props.items,
+      inventory: props.inventory
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({objects: nextProps.items})
+    this.setState({objects: nextProps.items, inventory: nextProps.inventory})
   }
   componentWillMount() {
     console.log("mounted");
@@ -23,7 +24,11 @@ class Game extends React.Component {
   renderItem(item) {
     return (
       <div className="item" >
-        <img onMouseOver={() => item.mouseOn()} onMouseOut={() => item.mouseOff()} src={item.image} />
+        <img
+          onClick={() => item.mouseClick()}
+          onMouseOver={() => item.mouseOn()}
+          onMouseOut={() => item.mouseOff()}
+          src={item.image} />
       </div>
     )
   }
@@ -31,12 +36,14 @@ class Game extends React.Component {
     return <div>
       <h1>This is the game</h1>
       {this.state.objects.map(object => this.renderItem(object))}
+      {this.state.inventory.map(item => <h1 onClick={() => this.props.dispatch(dropItem(item))}>{item.message}</h1>)}
     </div>
   }
 }
 
 const mapStateToProps = (state) => {
-  return {items:state.items}
+  return {items:state.items,
+  inventory: state.inventory}
 }
 
 export default connect(mapStateToProps)(Game)

@@ -7,6 +7,20 @@ export const receiveItem = (item) => {
   }
 }
 
+export const dropItem = (item) => {
+  return {
+    type: 'DROP_FROM_INVENTORY',
+    item
+  }
+}
+
+export const addItemToInventory = (item) => {
+  return {
+    type: 'ADD_TO_INVENTORY',
+    item
+  }
+}
+
 export function getGreetings () {
   return (dispatch) => {
     request
